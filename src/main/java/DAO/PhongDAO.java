@@ -21,8 +21,8 @@ public class PhongDAO {
                 Statement st = con.createStatement();
 
                 String sql = "SELECT p.loaiP, COUNT(*) AS soluong "
-                        + "FROM phong p "
-                        + "JOIN chitietthuephong c ON p.maP = c.maP "
+                        + "FROM PHONG p "
+                        + "JOIN CHITIETTHUEPHONG c ON p.maP = c.maP "
                         + "WHERE YEAR(c.ngayThue) = ? "
                         + "GROUP BY p.loaiP";
                 PreparedStatement prep = con.prepareStatement(sql);
@@ -52,8 +52,8 @@ public class PhongDAO {
                 Statement st = con.createStatement();
 
                 String sql = "SELECT p.chiTietLoaiP, COUNT(*) AS soluong "
-                        + "FROM phong p "
-                        + "JOIN chitietthuephong c ON p.maP = c.maP "
+                        + "FROM PHONG p "
+                        + "JOIN CHITIETTHUEPHONG c ON p.maP = c.maP "
                         + "WHERE YEAR(c.ngayThue) = ? "
                         + "GROUP BY p.chiTietLoaiP";
                 PreparedStatement prep = con.prepareStatement(sql);
@@ -183,18 +183,23 @@ public class PhongDAO {
     }
 
     public static ArrayList<PhongDTO> getListPhong(String datetimeThue, String datetimeTra, boolean check) {
+
+        System.out.println("PhongDAO -> getListPhong: ");
+        System.out.println("datetimeThue: " + datetimeThue);
+        System.out.println("datetimeTra: " + datetimeTra);
+
         ArrayList<PhongDTO> listPhong = new ArrayList<>();
         try {
             java.sql.Connection conn = getConnection();
             String query = "";
             if (check) {
-                query = "select * from phong "
-                        + "where tinhTrang = 0 and MAP not in "
-                        + "(select MAP from ChiTietThue, CHITIETTHUEPHONG where ChiTietThue.maCTT = CHITIETTHUEPHONG.maCTT and tinhTrangXuLy = 0 and xuLy = 0 and ngayThue <= '" + datetimeTra + "' and (ngayTra >= '" + datetimeThue + "' or ngayTra is null))";
+                query = "select * from PHONG "
+                        + "where tinhTrang = 0 and maP not in "
+                        + "(select maP from CHITIETTHUE, CHITIETTHUEPHONG where CHITIETTHUE.maCTT = CHITIETTHUEPHONG.maCTT and tinhTrangXuLy = 0 and xuLy = 0 and ngayThue <= '" + datetimeTra + "' and (ngayTra >= '" + datetimeThue + "' or ngayTra is null))";
             } else {
-                query = "select * from phong "
-                        + "where tinhTrang = 0 and MAP not in "
-                        + "(select MAP from ChiTietThue, CHITIETTHUEPHONG where ChiTietThue.maCTT = CHITIETTHUEPHONG.maCTT and tinhTrangXuLy = 0 and xuLy = 0 and "
+                query = "select * from PHONG "
+                        + "where tinhTrang = 0 and maP not in "
+                        + "(select maP from CHITIETTHUE, CHITIETTHUEPHONG where CHITIETTHUE.maCTT = CHITIETTHUEPHONG.maCTT and tinhTrangXuLy = 0 and xuLy = 0 and "
                         + "(ngayThue <= '" + datetimeThue + "' and (ngayTra >= '" + datetimeThue + "' or ngayTra is null) "
                         + "or (ngayThue >= '" + datetimeThue + "')))";
             }
@@ -243,7 +248,7 @@ public class PhongDAO {
             Connection con = new ConnectDB().getConnection();
             Statement st = con.createStatement();
 
-            String sql = "UPDATE phong "
+            String sql = "UPDATE PHONG "
                     + "SET tenP = ?, loaiP = ?, giaP = ?, chiTietLoaiP = ?, hienTrang = ? "
                     + "WHERE maP = ?";
             PreparedStatement prep = con.prepareStatement(sql);

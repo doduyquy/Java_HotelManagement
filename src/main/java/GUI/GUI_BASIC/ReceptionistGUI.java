@@ -59,14 +59,14 @@ public class ReceptionistGUI extends JFrame {
     JLabel lbInfo = new JLabel();
     JButton btnSettings = new JButton();
     public JPanel pnRight = new JPanel();
-    Border bdMatte2_2_2_2_efefef, bdEmpty0_7_0_0;
+    Border bdMatte2_2_2_2_efefef, bdEmpty0_3_0_0;
 
     ArrayList<JButton> listMenu = new ArrayList<>();
     JCalendar cd = new JCalendar();
 
     public ReceptionistGUI() {
         bdMatte2_2_2_2_efefef = new MatteBorder(2, 2, 2, 2, Color.decode("#efefef"));
-        bdEmpty0_7_0_0 = new EmptyBorder(0, 3, 0, 0);
+        bdEmpty0_3_0_0 = new EmptyBorder(0, 3, 0, 0);
         initComponents();
     }
 
@@ -198,7 +198,7 @@ public class ReceptionistGUI extends JFrame {
                 return basicComboPopup;
             }
         });
-        ((JComboBox) cd.getMonthChooser().getComboBox()).setBorder(BorderFactory.createCompoundBorder(bdMatte2_2_2_2_efefef, bdEmpty0_7_0_0));
+        ((JComboBox) cd.getMonthChooser().getComboBox()).setBorder(BorderFactory.createCompoundBorder(bdMatte2_2_2_2_efefef, bdEmpty0_3_0_0));
         ((JComboBox) cd.getMonthChooser().getComboBox()).setFont(sgUI15);
         cd.setBackground(Color.decode("#FAFAFA"));
         pnRight.setMaximumSize(new Dimension(300, 300));

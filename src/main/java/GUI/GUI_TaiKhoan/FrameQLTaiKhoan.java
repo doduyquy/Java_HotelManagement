@@ -113,9 +113,13 @@ public class FrameQLTaiKhoan extends javax.swing.JFrame {
         tbTK.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                if (me.getClickCount() == 1) {     // to detect doble click events
-                    int row = tbTK.getSelectedRow(); // select a row\
+                if (me.getClickCount() == 1) {     // to detect double click events
+                    int row = tbTK.getSelectedRow(); // select a row
                     String[] temp = new String[4];
+
+                    // Print the selected row data
+                    System.out.println("Selected Row: " + row);
+                    System.out.println("Data: " + tbTK.getValueAt(row, 0) + " " + tbTK.getValueAt(row, 1) + " " + tbTK.getValueAt(row, 2) + " " + tbTK.getValueAt(row, 3) + " " + tbTK.getValueAt(row, 4));
 
                     jDialogTaiKhoan capNhat = null;
                     //lay trang thai tai khoan Mở hay Chưa
@@ -138,8 +142,8 @@ public class FrameQLTaiKhoan extends javax.swing.JFrame {
                         }
                     });
 
-//              int column = tbTK.getSelectedColumn(); // select a column
-//              JOptionPane.showMessageDialog(null, tbTK.getValueAt(row, column)); // get the value of a row and column.
+                // int column = tbTK.getSelectedColumn(); // select a column
+                // JOptionPane.showMessageDialog(null, tbTK.getValueAt(row, column)); // get the value of a row and column.
                 }
             }
         });
@@ -154,6 +158,8 @@ public class FrameQLTaiKhoan extends javax.swing.JFrame {
     }
 
     private void actionSearch() {
+        System.out.println("actionSearch");
+
         //kiem tra va luu cac thuoc tinh
         boolean[] attris = new boolean[4];
         String[] values = new String[4];

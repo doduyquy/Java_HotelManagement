@@ -35,7 +35,7 @@ public class DichVuDAO implements DaoInterface<DichVuDTO> {
         try {
             //madv, tendv, loaidv, soluong, giadv, xuly
             Connection con = new ConnectDB().getConnection();
-            String sql = "SELECT * FROM dichvu";
+            String sql = "SELECT * FROM DICHVU";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {

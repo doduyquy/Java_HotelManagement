@@ -418,32 +418,50 @@ public class SoDoPhongGUI extends JPanel {
         btnSelectPhong.setBackground(Color.decode("#f1c40f"));
         btnSelectPhong.setFocusPainted(false);
 
+        // Khi chọn xong loại phòng, trạng thái phòng, loại hinh thuê,... Nhấn Chọn  phòng để chọn phòng thuê:
         btnSelectPhong.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                System.out.println("Đã nhấn Chọn phòng...");
+
+                // Kiểm tra xem thuê theo ngày | giờ | khác?
                 if (rdNgay.isSelected() || rdGio.isSelected() || rdKhac.isSelected()) {
                     DateTimeFormatter dateTimeFormatCheck = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+                    // Thuê theo ngày:
                     if (rdNgay.isSelected()) {
                         if (dateThue.getDate() == null) {
                             new ThongBaoDialog("Vui lòng nhập ngày thuê", 1);
                             editorThue.requestFocus();
                         } else {
+                            // Lấy ngày thuê:
                             Calendar cd = Calendar.getInstance();
                             cd.setTime(dateThue.getDate());
+                            // Ngày giờ thuê
                             LocalDateTime dateTimeThue = LocalDateTime.of(cd.get(Calendar.YEAR), cd.get(Calendar.MONTH) + 1, cd.get(Calendar.DATE), timeThue.getHour(), timeThue.getMinute(), 0);
+                            // Ngày giờ hiện tại
                             LocalDateTime dateNow = LocalDateTime.now();
                             DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+                            // Vì thuê theo ngày nên ngày thuê phải là ngày sau ngày hiện tại: 
                             if (dateTimeThue.isAfter(dateNow)) {
+                                // Kiểm tra ngày trả KHÔNG RỖNG: 
                                 if (dateTra.getDate() == null) {
                                     new ThongBaoDialog("Vui lòng nhập ngày trả", 1);
                                     editorTra.requestFocus();
                                 } else {
+                                    // Vì thuê theo ngày -> ngày giờ thuê = ngày giờ trả: 
                                     timeTra.setHour(timeThue.getHour());
                                     timeTra.setMinute(timeThue.getMinute());
                                     Calendar cdTra = Calendar.getInstance();
                                     cdTra.setTime(dateTra.getDate());
                                     LocalDateTime dateTimeTra = LocalDateTime.of(cdTra.get(Calendar.YEAR), cdTra.get(Calendar.MONTH) + 1, cdTra.get(Calendar.DATE), timeTra.getHour(), timeTra.getMinute(), 0);
+                                    // Kiểm tra ngày trả phải sau ngày thuê:
                                     if (dateTimeTra.isAfter(dateTimeThue)) {
+                                        // Reset lại option thuê:
+                                        System.out.println("Reset lại option thuê: ");
+
                                         rdNgay.setEnabled(false);
                                         rdGio.setEnabled(false);
                                         rdKhac.setEnabled(false);
@@ -451,13 +469,20 @@ public class SoDoPhongGUI extends JPanel {
                                         dateTra.setEnabled(false);
                                         timeThue.setEnable(false);
                                         timeTra.setEnable(false);
+
                                         dateTimeThue = LocalDateTime.of(cd.get(Calendar.YEAR), cd.get(Calendar.MONTH) + 1, cd.get(Calendar.DATE), timeThue.getHour() - 2, timeThue.getMinute(), 0);
                                         dateTimeTra = LocalDateTime.of(cdTra.get(Calendar.YEAR), cdTra.get(Calendar.MONTH) + 1, cdTra.get(Calendar.DATE), timeTra.getHour(), timeTra.getMinute(), 0);
                                         String dateTimeThuestr = dateTimeThue.format(dateTimeFormatCheck);
                                         String dateTimeTrastr = dateTimeTra.format(dateTimeFormatCheck);
+
+                                        System.out.println("#-- Thuê theo ngày: ");
+                                        System.out.println("Ngay giờ thuê: " + dateTimeThuestr);
+                                        System.out.println("Ngày giờ trả: " + dateTimeTrastr);
+
                                         ArrayList<PhongDTO> listP = PhongBUS.getListP(dateTimeThuestr, dateTimeTrastr, true);
                                         ArrayList<PhongDTO> listSearch = search(listP);
                                         renderCell(listSearch);
+                                    
                                     } else {
                                         new ThongBaoDialog("Vui lòng nhập ngày giờ trả phải hơn ngày thuê", 1);
                                     }
@@ -466,7 +491,9 @@ public class SoDoPhongGUI extends JPanel {
                                 new ThongBaoDialog("Vui lòng nhập ngày giờ thuê phải hơn ngày hiện tại", 1);
                             }
                         }
+                    // Nếu chỉ thuê theo giờ: 
                     } else if (rdGio.isSelected()) {
+                        // Kiểm tra ngày thuê không rỗng:
                         if (dateThue.getDate() == null) {
                             new ThongBaoDialog("Vui lòng nhập ngày thuê", 1);
                             editorThue.requestFocus();
@@ -476,6 +503,8 @@ public class SoDoPhongGUI extends JPanel {
                             LocalDateTime dateTimeThue = LocalDateTime.of(cd.get(Calendar.YEAR), cd.get(Calendar.MONTH) + 1, cd.get(Calendar.DATE), timeThue.getHour(), timeThue.getMinute(), 0);
                             LocalDateTime dateNow = LocalDateTime.now();
                             DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                            
+                            // Giờ thuê  phải sau giờ hiện tại: 
                             if (dateTimeThue.isAfter(dateNow)) {
                                 if (dateTra.getDate() == null) {
                                     new ThongBaoDialog("Vui lòng nhập ngày trả", 1);
@@ -485,12 +514,14 @@ public class SoDoPhongGUI extends JPanel {
                                     cdTra.setTime(dateTra.getDate());
                                     LocalDateTime dateTimeTra = LocalDateTime.of(cdTra.get(Calendar.YEAR), cdTra.get(Calendar.MONTH) + 1, cdTra.get(Calendar.DATE), timeTra.getHour(), timeTra.getMinute(), 0);
                                     if (dateTimeTra.isAfter(dateTimeThue)) {
+                                        // Tính giờ thuê: HOURS (dateTimeTra - dateTimeThue)
                                         int countHour = (int) ChronoUnit.HOURS.between(dateTimeThue, dateTimeTra);
+                                        // Kiểm tra số giơ thuê có phải là bội của 24? -> Thuê theo ngày -> Thông báo.
                                         if (countHour % 24 == 0 && countHour != 0) {
                                             new ThongBaoDialog("Có vẻ bạn muốn thuê phòng theo ngày vui lòng cân nhắc", 1);
                                         } else if (countHour == 0) {
                                             new ThongBaoDialog("Không thể thuê phòng ít hơn 1 giờ", 1);
-                                        } else {
+                                        } else { // Hợp lệ
                                             rdNgay.setEnabled(false);
                                             rdGio.setEnabled(false);
                                             rdKhac.setEnabled(false);
@@ -502,6 +533,11 @@ public class SoDoPhongGUI extends JPanel {
                                             dateTimeTra = LocalDateTime.of(cdTra.get(Calendar.YEAR), cdTra.get(Calendar.MONTH) + 1, cdTra.get(Calendar.DATE), timeTra.getHour(), timeTra.getMinute(), 0);
                                             String dateTimeThuestr = dateTimeThue.format(dateTimeFormatCheck);
                                             String dateTimeTrastr = dateTimeTra.format(dateTimeFormatCheck);
+                                            
+                                            System.out.println("#-- Thuê theo giờ: ");
+                                            System.out.println("Ngay giờ thuê: " + dateTimeThuestr);
+                                            System.out.println("Ngày giờ trả: " + dateTimeTrastr);
+    
                                             ArrayList<PhongDTO> listP = PhongBUS.getListP(dateTimeThuestr, dateTimeTrastr, true);
                                             ArrayList<PhongDTO> listSearch = search(listP);
                                             renderCell(listSearch);
@@ -514,6 +550,7 @@ public class SoDoPhongGUI extends JPanel {
                                 new ThongBaoDialog("Vui lòng nhập ngày giờ thuê phải hơn ngày hiện tại", 1);
                             }
                         }
+                    // Nếu thuê theo cách khác: (không cố định theo ngày giờ, ví dụ từ 7h tối đến 12h trưa hôm sau)
                     } else if (rdKhac.isSelected()) {
                         if (dateThue.getDate() == null) {
                             new ThongBaoDialog("Vui lòng nhập ngày thuê", 1);
@@ -534,6 +571,12 @@ public class SoDoPhongGUI extends JPanel {
                                 timeTra.setEnable(false);
                                 dateTimeThue = LocalDateTime.of(cd.get(Calendar.YEAR), cd.get(Calendar.MONTH) + 1, cd.get(Calendar.DATE), timeThue.getHour() - 2, timeThue.getMinute(), 0);
                                 String dateTimeThuestr = dateTimeThue.format(dateTimeFormatCheck);
+
+                                System.out.println("#-- Thuê khác: ");
+                                System.out.println("Ngay giờ thuê: " + dateTimeThuestr);
+                                // System.out.println("Ngày giờ trả: " + dateTimeTrastr);
+
+
                                 ArrayList<PhongDTO> listP = PhongBUS.getListP(dateTimeThuestr, "", false);
                                 ArrayList<PhongDTO> listSearch = search(listP);
                                 renderCell(listSearch);

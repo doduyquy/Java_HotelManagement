@@ -39,7 +39,7 @@ public class KhachHangDAO implements DaoInterface<KhachHangDTO> {
         ArrayList<KhachHangDTO> list = new ArrayList<>();
         try {
             Connection conn = getConnection();
-            String query = "select * from khachhang";
+            String query = "select * from KHACHHANG";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
@@ -67,7 +67,7 @@ public class KhachHangDAO implements DaoInterface<KhachHangDTO> {
         ArrayList<KhachHangDTO> list = new ArrayList<>();
         try {
             Connection conn = getConnection();
-            String query = "select * from khachhang " + search;
+            String query = "select * from KHACHHANG " + search;
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
@@ -104,7 +104,7 @@ public class KhachHangDAO implements DaoInterface<KhachHangDTO> {
         try {
             //maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy
             Connection con = new ConnectDB().getConnection();
-            String sql = "SELECT * FROM khachhang WHERE maKH='" + t + "'";
+            String sql = "SELECT * FROM KHACHHANG WHERE maKH='" + t + "'";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -302,7 +302,7 @@ public class KhachHangDAO implements DaoInterface<KhachHangDTO> {
         try {
             //maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy
             Connection con = new ConnectDB().getConnection();
-            String sql = "SELECT COUNT(*) FROM khachhang";
+            String sql = "SELECT COUNT(*) FROM KHACHHANG";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {

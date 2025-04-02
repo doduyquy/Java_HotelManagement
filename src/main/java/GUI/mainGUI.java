@@ -10,12 +10,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 public class mainGUI {
     public static NhanVienDTO nv = new NhanVienDTO();
 
     public static void main(String[] args) {
+        // setLookAndFeel(); // Đặt Look and Feel trước khi mở form
         // connectToDatabase();
         new FormLogin();
+    }
+    private static void setLookAndFeel() {
+        try {
+            // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            // UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+
+        } catch (ClassNotFoundException | InstantiationException | 
+                 IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void connectToDatabase() {

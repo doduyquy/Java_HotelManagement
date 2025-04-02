@@ -29,7 +29,7 @@ public class ChiTietThuePhongDAO implements DaoInterface<ChiTietThuePhongDTO> {
             Connection con = new ConnectDB().getConnection();
             Statement st = con.createStatement();
 
-            String sql = "UPDATE chitietthuephong\r\n"
+            String sql = "UPDATE CHITIETTHUEPHONG\r\n"
                     + "SET "
                     + "tinhTrang= ? "
                     + "WHERE maCTT = ?";
@@ -81,7 +81,7 @@ public class ChiTietThuePhongDAO implements DaoInterface<ChiTietThuePhongDTO> {
         try {
             //maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy
             Connection con = new ConnectDB().getConnection();
-            String sql = "SELECT * FROM chitietthuephong";
+            String sql = "SELECT * FROM CHITIETTHUEPHONG";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -359,7 +359,7 @@ public class ChiTietThuePhongDAO implements DaoInterface<ChiTietThuePhongDTO> {
 //		ChiTietThuePhongDTO ctt=null;
         try {
             Connection con = new ConnectDB().getConnection();
-            String sql = "SELECT * FROM chitietthuephong WHERE maP='" + maP + "'";
+            String sql = "SELECT * FROM CHITIETTHUEPHONG WHERE maP='" + maP + "'";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {

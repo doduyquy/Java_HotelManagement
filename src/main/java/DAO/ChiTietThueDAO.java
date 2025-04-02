@@ -24,7 +24,7 @@ public class ChiTietThueDAO implements DaoInterface<ChiTietThueDTO> {
         int count = 0;
         try {
             java.sql.Connection conn = getConnection();
-            String query = "SELECT COUNT(*) AS soLanThue FROM chitietthue WHERE maKH = '" + maKH + "'";
+            String query = "SELECT COUNT(*) AS soLanThue FROM CHITIETTHUE WHERE maKH = '" + maKH + "'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
@@ -44,7 +44,7 @@ public class ChiTietThueDAO implements DaoInterface<ChiTietThueDTO> {
             Connection con = new ConnectDB().getConnection();
             Statement st = con.createStatement();
 
-            String sql = "UPDATE chitietthue\r\n"
+            String sql = "UPDATE CHITIETTHUE\r\n"
                     + "SET "
                     + "tinhTrangXuLy= ?, "
                     + "xuLy= ? "
@@ -98,7 +98,7 @@ public class ChiTietThueDAO implements DaoInterface<ChiTietThueDTO> {
         try {
             //maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy
             Connection con = new ConnectDB().getConnection();
-            String sql = "SELECT * FROM chitietthue";
+            String sql = "SELECT * FROM CHITIETTHUE";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -136,7 +136,7 @@ public class ChiTietThueDAO implements DaoInterface<ChiTietThueDTO> {
         ChiTietThueDTO ctt = null;
         try {
             Connection conn = getConnection();
-            String query = "select * from chitietthue where maCTT = '" + maCTT + "'";
+            String query = "select * from CHITIETTHUE where maCTT = '" + maCTT + "'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {

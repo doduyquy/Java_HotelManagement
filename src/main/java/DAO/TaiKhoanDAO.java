@@ -36,7 +36,7 @@ public class TaiKhoanDAO {
         TaiKhoanDTO tk = null;
         try {
             Connection conn = getConnection();
-            String query = "select * from TaiKhoan where taiKhoan = '" + taiKhoan + "'";
+            String query = "select * from TAIKHOAN where taiKhoan = '" + taiKhoan + "'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
@@ -91,7 +91,7 @@ public class TaiKhoanDAO {
         boolean check = false;
         try {
             Connection conn = getConnection();
-            String query = "select * from taiKhoan where taiKhoan = '" + taiKhoan + "'";
+            String query = "select * from TAIKHOAN where taiKhoan = '" + taiKhoan + "'";
             System.out.println(query);
             PreparedStatement ps = conn.prepareCall(query);
             ResultSet rs = ps.executeQuery();
@@ -110,7 +110,7 @@ public class TaiKhoanDAO {
         Date ngaySinh = null;
         try {
             Connection conn = getConnection();
-            String query = "select ngaySinh from nhanVien where maNV= '" + maNV + "'";
+            String query = "select ngaySinh from NHANVIEN where maNV= '" + maNV + "'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
@@ -119,12 +119,17 @@ public class TaiKhoanDAO {
             DateFormat df = new SimpleDateFormat("ddMMyyyy");
             ngaySinhStr = df.format(ngaySinh);
 
-            //salting
-            //ngaySinhStr="mat"+ngaySinhStr+"khau";
+            // salting
+            //      ngaySinhStr="mat"+ngaySinhStr+"khau";
             // Băm dữ liệu
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             byte[] data = ngaySinhStr.getBytes();
             matKhau = md.digest(data);
+
+            // matKhau = ngaySinhStr.getBytes("UTF-8");
+            // System.out.println("matKhau: " + Arrays.toString(matKhau));
+
+
             st.close();
             conn.close();
         } catch (Exception e) {
@@ -137,10 +142,13 @@ public class TaiKhoanDAO {
         boolean check = false;
         try {
             byte[] mK = createHashMK(x.getMaNV());
+
+            // System.err.println("matKhau: " + Arrays.toString(mK));
+            
             Connection conn = getConnection();
-            String query = "insert into TaiKhoan(taiKhoan,maNV,matKhau,tinhTrang,vaiTro) values (?,?,?,?,?)";
+            String query = "insert into TAIKHOAN(taiKhoan,maNV,matKhau,tinhTrang,vaiTro) values (?,?,?,?,?)";
             PreparedStatement ps = conn.prepareCall(query);
-            ps.setString(1, x.getTaiKhoan());
+            ps.setString(1, x.getTaiKhoan());   
             ps.setString(2, x.getMaNV());
             ps.setBytes(3, mK);
             ps.setInt(4, x.getTinhTrang());
@@ -160,7 +168,7 @@ public class TaiKhoanDAO {
         boolean check = false;
         try {
             Connection conn = getConnection();
-            String query = "update TaiKhoan set tinhTrang = 1 where taiKhoan = '" + taiKhoan + "'";
+            String query = "update TAIKHOAN set tinhTrang = 1 where taiKhoan = '" + taiKhoan + "'";
             Statement st = conn.createStatement();
             if (st.executeUpdate(query) >= 1) {
                 check = true;
@@ -176,7 +184,7 @@ public class TaiKhoanDAO {
         boolean check = false;
         try {
             Connection conn = getConnection();
-            String query = "update TaiKhoan set maNV = ?, vaiTro = ?, tinhTrang = ? where taiKhoan = '" + x.getTaiKhoan() + "'";
+            String query = "update TAIKHOAN set maNV = ?, vaiTro = ?, tinhTrang = ? where taiKhoan = '" + x.getTaiKhoan() + "'";
             PreparedStatement ps = conn.prepareCall(query);
             ps.setString(1, x.getMaNV());
             ps.setString(2, x.getVaiTro());
@@ -339,7 +347,7 @@ public class TaiKhoanDAO {
             byte[] data = matKhau.getBytes();
             byte[] mk = md.digest(data);
             Connection conn = getConnection();
-            String query = "update TaiKhoan set matKhau = ? where taiKhoan = ?";
+            String query = "update TAIKHOAN set matKhau = ? where taiKhoan = ?";
             PreparedStatement ps = conn.prepareCall(query);
             ps.setBytes(1, mk);
             ps.setString(2, taiKhoan);

@@ -25,11 +25,11 @@ public class ItemHoaDonDAO {
         try {
             //maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy
             Connection con = new ConnectDB().getConnection();
-            String sql = "select DISTINCT phong.tenP, chitietthuephong.loaiHinhThue,chitietthuephong.ngayThue,chitietthuephong.ngayCheckOut, chitietthuephong.giaThue\r\n"
+            String sql = "select DISTINCT phong.tenP, CHITIETTHUEPHONG.loaiHinhThue,CHITIETTHUEPHONG.ngayThue,CHITIETTHUEPHONG.ngayCheckOut, CHITIETTHUEPHONG.giaThue\r\n"
                     + "from CHITIETTHUE inner join CHITIETTHUEPHONG on  CHITIETTHUE.maCTT = CHITIETTHUEPHONG.maCTT\r\n"
                     + "				inner join PHONG on CHITIETTHUEPHONG.maP = PHONG.maP\r\n"
                     + "				left join HoaDon on HOADON.maCTT = CHITIETTHUE.maCTT\r\n"
-                    + "				where CHITIETTHUEPHONG.maCTT = '" + mactt + "' and chitietthuephong.tinhtrang = 2";
+                    + "				where CHITIETTHUEPHONG.maCTT = '" + mactt + "' and CHITIETTHUEPHONG.tinhtrang = 2";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {

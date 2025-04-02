@@ -26,7 +26,7 @@ public class ItemDVDAO {
             Connection con = new ConnectDB().getConnection();
             String sql = "select DISTINCT tenDV, loaiDV,ngaySuDung, CHITIETTHUEDICHVU.SoLuong, CHITIETTHUEDICHVU.giaDV, \r\n"
                     + "(CHITIETTHUEDICHVU.SoLuong *  CHITIETTHUEDICHVU.giaDV) as THANHTIEN from DICHVU, CHITIETTHUEDICHVU, CHITIETTHUE, HOADON\r\n"
-                    + "where DICHVU.maDV = CHITIETTHUEDICHVU.maDV and CHITIETTHUEDICHVU.maCTT = CHITIETTHUE.maCTT and HOADON.maCTT = CHITIETTHUE.maCTT AND chitietthue.maCTT = '" + mactt + "' and chitietthue.tinhTrangXuLy = 0";
+                    + "where DICHVU.maDV = CHITIETTHUEDICHVU.maDV and CHITIETTHUEDICHVU.maCTT = CHITIETTHUE.maCTT and HOADON.maCTT = CHITIETTHUE.maCTT AND CHITIETTHUE.maCTT = '" + mactt + "' and CHITIETTHUE.tinhTrangXuLy = 0";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
