@@ -128,6 +128,8 @@ public class FormHoaDon extends JDialog {
 
     public FormHoaDon(HoaDonDTO hd) {
 
+        System.out.println("Danh sach hoa don -> In hoa don (duoc chon):" + hd.getMaHD());
+
         setModal(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -142,13 +144,24 @@ public class FormHoaDon extends JDialog {
         btnAcp.setBackground(Color.green);
 
         btnAcp.setText("In hóa đơn");
+
+        System.out.println("Danh sach hoa don -> In hoa don (duoc chon) -> Before actionListener: "
+                + hd.getMaHD());
+
+        // ERROR:
         btnAcp.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
                 xuLyHienThiHoaDon(hd);
+
+                System.out.println("Danh sach hoa don -> In hoa don (duoc chon) -> After xuLyHienThiHoaDon: "
+                        + hd.getMaHD());
+
                 btnInHoaDonActionPerformed();
+
+
                 new ThongBaoDialog("In hóa đơn thành công", ThongBaoDialog.SUCCESS_DIALOG);
                 dispose();
             }
@@ -167,7 +180,15 @@ public class FormHoaDon extends JDialog {
             }
         });
         txtHoaDon = new JEditorPane();
+
+        System.out.println("Danh sach hoa don -> In hoa don (duoc chon) -> Before xuLyHienThiHoaDon: "
+        + hd.getMaHD());
+
         xuLyHienThiHoaDon(hd);
+
+        System.out.println("Danh sach hoa don -> In hoa don (duoc chon) -> After xuLyHienThiHoaDon: "
+        + hd.getMaHD());
+
         scr = new JScrollPane();
         scr.setViewportView(txtHoaDon);
         scr.setBackground(Color.white);
@@ -181,65 +202,65 @@ public class FormHoaDon extends JDialog {
         add(pnBot, BorderLayout.SOUTH);
         setVisible(true);
     }
+    // Commented out code for testing purposes
+//     private void xuLyHienThiHoaDon(String maHD, String tenNV, String maCTT, String tienPhong, String tienDV,
+//             String giamGia, String phuThu, String tongTien, String ngayLap, String pttt, String tenKH) {
+//         txtHoaDon.setContentType("text/html");
+// //        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+// //        LocalDateTime now = LocalDateTime.now();
+// //		DecimalFormat dcf = new DecimalFormat("###,### VND");
 
-    private void xuLyHienThiHoaDon(String maHD, String tenNV, String maCTT, String tienPhong, String tienDV,
-            String giamGia, String phuThu, String tongTien, String ngayLap, String pttt, String tenKH) {
-        txtHoaDon.setContentType("text/html");
-//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-//        LocalDateTime now = LocalDateTime.now();
-//		DecimalFormat dcf = new DecimalFormat("###,### VND");
+//         String hd = "<style> " + "table {" + "border: 1px solid;" + "border-bottom: none" + "}" + "tr {"
+//                 + "border-bottom: 1px solid;" + "}" + "td {" + "padding: 8px;" + "} " + "th {" + "font-size:16pt" + "}"
+//                 + "</style>";
+//         hd += "<h1 style='text-align:center;'>HOÁ ĐƠN THANH TOÁN</h1>";
+//         hd += "Mã hóa đơn: " + maHD + "<br/>";
+// //		hd += "Mã chi tiết thuê: " + maCTT + "<br/>";
+//         hd += "Nhân viên: " + tenNV + "<br/>";
+//         hd += "Ngày lập: " + ngayLap + "<br/>";
+//         hd += "Khách hàng: " + tenKH + "<br/>";
+//         hd += "<div style='text-align:center;'>==========================================</div><br/>";
+//         hd += "<div style='text-align:center'>";
+//         hd += "<table style='max-width:100%'>";
+//         hd += "<tr>" + "<th>Mã chi tiết thuê</th>" + "<th>Tiền phòng</th>" + "<th>Tiền dịch vụ</th>"
+//                 + "<th>Giảm giá</th>" + "<th>Phụ thu</th>" + "</tr>";
+// //		for (CTHoaDon cthd : CTHoaDonBUS.getIntance().layDanhSachTheoMaHD(maHD)) {
+// //			String tenSP = MatHangBUS.getInstance().layTenSanPhamById(cthd.getMaMH());
+// //
+//         hd += "<tr>";
+//         hd += "<td style='text-align:center;'>" + maCTT + "</td>";
+//         hd += "<td style='text-align:center;'>" + tienPhong + "</td>";
+//         hd += "<td style='text-align:left;'>" + tienDV + "</td>";
+//         hd += "<td style='text-align:center;'>" + giamGia + "</td>";
+//         hd += "<td style='text-align:center;'>" + phuThu + "</td>";
+// //			hd += "<td style='text-align:center;'>" + dcf.format(cthd.getThanhTien()) + "</td>";
+//         hd += "</tr>";
+// //		}
+// //		xuLyHienThiHoaDon(maHd, tenNV, maCTT, tienPhong, tienDV, giamGia, phuThu, tongTien,ngayLap,pttt,tenKH);
+//         hd += "<tr>";
+//         hd += "<td style='text-align:center;'>" + "</td>";
+//         hd += "<td style='text-align:left;'>" + "</td>";
+//         hd += "<td style='text-align:center;'>" + "</td>";
+//         hd += "<td style='text-align:center;font-weight:bold'>Thành tiền</td>";
+//         hd += "<td style='text-align:center;'>" + tongTien + "</td>";
+//         hd += "</tr>";
+//         hd += "<tr>";
+//         hd += "<td style='text-align:center;'>" + "</td>";
+//         hd += "<td style='text-align:left;'>" + "</td>";
+//         hd += "<td style='text-align:center;'>" + "</td>";
+//         hd += "<td style='text-align:center;font-weight:bold'>Phương thức thanh toán</td>";
+//         hd += "<td style='text-align:center;'>" + pttt + "</td>";
+//         hd += "</tr>";
 
-        String hd = "<style> " + "table {" + "border: 1px solid;" + "border-bottom: none" + "}" + "tr {"
-                + "border-bottom: 1px solid;" + "}" + "td {" + "padding: 8px;" + "} " + "th {" + "font-size:16pt" + "}"
-                + "</style>";
-        hd += "<h1 style='text-align:center;'>HOÁ ĐƠN THANH TOÁN</h1>";
-        hd += "Mã hóa đơn: " + maHD + "<br/>";
-//		hd += "Mã chi tiết thuê: " + maCTT + "<br/>";
-        hd += "Nhân viên: " + tenNV + "<br/>";
-        hd += "Ngày lập: " + ngayLap + "<br/>";
-        hd += "Khách hàng: " + tenKH + "<br/>";
-        hd += "<div style='text-align:center;'>==========================================</div><br/>";
-        hd += "<div style='text-align:center'>";
-        hd += "<table style='max-width:100%'>";
-        hd += "<tr>" + "<th>Mã chi tiết thuê</th>" + "<th>Tiền phòng</th>" + "<th>Tiền dịch vụ</th>"
-                + "<th>Giảm giá</th>" + "<th>Phụ thu</th>" + "</tr>";
-//		for (CTHoaDon cthd : CTHoaDonBUS.getIntance().layDanhSachTheoMaHD(maHD)) {
-//			String tenSP = MatHangBUS.getInstance().layTenSanPhamById(cthd.getMaMH());
-//
-        hd += "<tr>";
-        hd += "<td style='text-align:center;'>" + maCTT + "</td>";
-        hd += "<td style='text-align:center;'>" + tienPhong + "</td>";
-        hd += "<td style='text-align:left;'>" + tienDV + "</td>";
-        hd += "<td style='text-align:center;'>" + giamGia + "</td>";
-        hd += "<td style='text-align:center;'>" + phuThu + "</td>";
-//			hd += "<td style='text-align:center;'>" + dcf.format(cthd.getThanhTien()) + "</td>";
-        hd += "</tr>";
-//		}
-//		xuLyHienThiHoaDon(maHd, tenNV, maCTT, tienPhong, tienDV, giamGia, phuThu, tongTien,ngayLap,pttt,tenKH);
-        hd += "<tr>";
-        hd += "<td style='text-align:center;'>" + "</td>";
-        hd += "<td style='text-align:left;'>" + "</td>";
-        hd += "<td style='text-align:center;'>" + "</td>";
-        hd += "<td style='text-align:center;font-weight:bold'>Thành tiền</td>";
-        hd += "<td style='text-align:center;'>" + tongTien + "</td>";
-        hd += "</tr>";
-        hd += "<tr>";
-        hd += "<td style='text-align:center;'>" + "</td>";
-        hd += "<td style='text-align:left;'>" + "</td>";
-        hd += "<td style='text-align:center;'>" + "</td>";
-        hd += "<td style='text-align:center;font-weight:bold'>Phương thức thanh toán</td>";
-        hd += "<td style='text-align:center;'>" + pttt + "</td>";
-        hd += "</tr>";
+//         hd += "</table>";
+//         hd += "</div>";
+//         hd += "<div style='text-align:center;'>==========================================</div><br/>";
 
-        hd += "</table>";
-        hd += "</div>";
-        hd += "<div style='text-align:center;'>==========================================</div><br/>";
+//         txtHoaDon.setText(hd);
+// //		new FormHoaDon(txtHoaDon, sgUI18b);
 
-        txtHoaDon.setText(hd);
-//		new FormHoaDon(txtHoaDon, sgUI18b);
-
-//        txtTongTien.setText(dcf.format(tongTien));
-    }
+// //        txtTongTien.setText(dcf.format(tongTien));
+//     }
 
 //	private void xuLyHienThiHoaDon(HoaDonDTO hdto) {
 //		txtHoaDon.setContentType("text/html");
@@ -301,6 +322,9 @@ public class FormHoaDon extends JDialog {
 ////        txtTongTien.setText(dcf.format(tongTien));
 //	}
     private void xuLyHienThiHoaDon(HoaDonDTO hdto) {
+
+        System.out.println("Danh sach hoa don -> In xuLyHienThiHoaDon (duoc chon):" + hdto.getMaHD());
+
         txtHoaDon.setContentType("text/html");
         String hd = "		<!DOCTYPE html>\r\n" + "		<html lang=\"en\">\r\n" + "		<head>\r\n"
                 + "		    <meta charset=\"UTF-8\">\r\n"

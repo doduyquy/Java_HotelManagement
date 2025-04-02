@@ -1199,6 +1199,10 @@ public class HoaDonLeTanGUI extends JDialog {
                 if (ThongBaoDialog.action == ThongBaoDialog.CANCEL_OPTION) {
                     return;
                 }
+
+                // thanh toán
+                System.out.println("Le tan: sau khi thanh toan -> xuat hoa don");
+
                 new FormHoaDon(1, hd, HoaDonLeTanGUI.this);
             }
         });

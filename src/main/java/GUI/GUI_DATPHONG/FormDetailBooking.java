@@ -1024,6 +1024,9 @@ public class FormDetailBooking extends JPanel {
         btnAceptRoom.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                System.out.println("btnAceptRoom click");
+
                 if (tb.getSelectedRow() != -1) {
                     DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                     if (rdNgay.isSelected()) {
@@ -1196,9 +1199,12 @@ public class FormDetailBooking extends JPanel {
                 }
             }
         });
+
+        // Bảng danh sách phòng thuê
         tbCTTRoom.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                // BUTTON3: chuột phải
                 if (e.getButton() == MouseEvent.BUTTON3) {
                     JPopupMenu pm = new JPopupMenu();
                     JMenuItem miL = new JMenuItem("Lấy phòng");
@@ -1222,6 +1228,8 @@ public class FormDetailBooking extends JPanel {
                     miT.setFont(sgUI13);
                     miT.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/GUI/assets/cancel-144.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                     pm.show(tbCTTRoom, e.getX(), e.getY());
+
+                    // Lắng nghe sự kiện XÓA PHÒNG
                     miX.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -1258,6 +1266,8 @@ public class FormDetailBooking extends JPanel {
                             }
                         }
                     });
+
+                    // Lắng nghe sự kiến LẤY PHÒNG
                     miL.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -1275,10 +1285,16 @@ public class FormDetailBooking extends JPanel {
                                         String dateTimeThue = tbCTTRoom.getValueAt(tbCTTRoom.getSelectedRow(), tbCTTRoom.getColumnModel().getColumnIndex("Ngày thuê")).toString().trim();
                                         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                                         SimpleDateFormat sdfInsert = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                                        System.out.println("Xac nhan lay phong: " + maP + " " + dateTimeThue);
+
                                         Date date = null;
                                         try {
                                             date = sdf.parse(dateTimeThue);
                                         } catch (ParseException ex) {
+                                            // Print exception:
+                                            ex.printStackTrace();
+                                            System.out.println("Loi parse dataTimeThue: " + ex.getMessage());
                                         }
                                         if (ChiTietThuePhongBUS.updateTT(txtMaCTT.getText().trim(), maP, sdfInsert.format(date), 1) && PhongBUS.updateTT(maP, 1)) {
                                             new ThongBaoDialog("Lấy phòng thuê này thành công", 2);
@@ -1295,6 +1311,8 @@ public class FormDetailBooking extends JPanel {
                             }
                         }
                     });
+                    
+                    // Lắng nghe sự kiện TRẢ PHÒNG
                     miT.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {

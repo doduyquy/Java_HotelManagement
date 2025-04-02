@@ -29,7 +29,7 @@ public class HoaDonDAO implements DaoInterface<HoaDonDTO> {
             Connection con = new ConnectDB().getConnection();
             Statement st = con.createStatement();
             //maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy
-            String sql = "INSERT INTO hoadon(maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy)\r\n"
+            String sql = "INSERT INTO HOADON(maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy)\r\n"
                     + "VALUES (?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement prep = con.prepareStatement(sql);
             prep.setString(1, t.getMaHD());
@@ -71,7 +71,7 @@ public class HoaDonDAO implements DaoInterface<HoaDonDTO> {
             Connection con = new ConnectDB().getConnection();
             Statement st = con.createStatement();
 
-            String sql = "UPDATE hoadon\r\n"
+            String sql = "UPDATE HOADON\r\n"
                     + "SET "
                     + "tienP= ?, "
                     + "tienDV= ?, "
@@ -120,7 +120,7 @@ public class HoaDonDAO implements DaoInterface<HoaDonDTO> {
             //maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy
             Connection con = new ConnectDB().getConnection();
             Statement st = con.createStatement();
-            String sql = "DELETE FROM hoadon "
+            String sql = "DELETE FROM HOADON "
                     + "WHERE maHD = '" + t.getMaHD() + "';";
             check = st.executeUpdate(sql);
             if (check > 1) {
@@ -175,7 +175,7 @@ public class HoaDonDAO implements DaoInterface<HoaDonDTO> {
         try {
             //maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy
             Connection con = new ConnectDB().getConnection();
-            String sql = "SELECT * FROM hoadon WHERE maHD='" + t.getMaHD() + "'";
+            String sql = "SELECT * FROM HOADON WHERE maHD='" + t.getMaHD() + "'";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -216,7 +216,7 @@ public class HoaDonDAO implements DaoInterface<HoaDonDTO> {
             //maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy
             Connection con = new ConnectDB().getConnection();
             String sql = "SELECT SUM(tongTien) AS total_cost "
-                    + "FROM hoadon "
+                    + "FROM HOADON "
                     + "WHERE ngayThanhToan BETWEEN '" + sdf1.format(tuNgay) + "' AND '" + sdf1.format(denNgay) + "';";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -240,7 +240,7 @@ public class HoaDonDAO implements DaoInterface<HoaDonDTO> {
             //maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy
             Connection con = new ConnectDB().getConnection();
             String sql = "SELECT maHD "
-                    + "FROM hoadon "
+                    + "FROM HOADON "
                     + "WHERE ngayThanhToan BETWEEN '" + sdf1.format(tuNgay) + "' AND '" + sdf1.format(denNgay) + "';";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -266,7 +266,7 @@ public class HoaDonDAO implements DaoInterface<HoaDonDTO> {
             //maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy
             Connection con = new ConnectDB().getConnection();
             String sql = "SELECT * "
-                    + "FROM hoadon "
+                    + "FROM HOADON "
                     + "WHERE tongTien BETWEEN " + giaTu + " AND " + denGia + ";";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -300,7 +300,7 @@ public class HoaDonDAO implements DaoInterface<HoaDonDTO> {
             Connection con = new ConnectDB().getConnection();
             Statement st = con.createStatement();
 
-            String sql = "UPDATE hoadon\r\n"
+            String sql = "UPDATE HOADON\r\n"
                     + "SET "
                     + "xuLy= ? "
                     + "WHERE maHD = ?";
@@ -335,7 +335,7 @@ public class HoaDonDAO implements DaoInterface<HoaDonDTO> {
             Connection con = new ConnectDB().getConnection();
             Statement st = con.createStatement();
 
-            String sql = "SELECT SUM(tongTien) AS tong_tien FROM hoadon WHERE YEAR(ngayThanhToan) = ? AND MONTH(ngayThanhToan) = ? ";
+            String sql = "SELECT SUM(tongTien) AS tong_tien FROM HOADON WHERE YEAR(ngayThanhToan) = ? AND MONTH(ngayThanhToan) = ? ";
             PreparedStatement prep = con.prepareStatement(sql);
             prep.setInt(1, nam);
             prep.setInt(2, thang);
@@ -366,8 +366,8 @@ public class HoaDonDAO implements DaoInterface<HoaDonDTO> {
             Statement st = con.createStatement();
 
             String sql = "SELECT p.maPN, SUM(c.giaDVNhap * c.soLuong) AS tong_tien "
-                    + "FROM phieunhap p "
-                    + "JOIN chitietnhap c ON p.maPN = c.maPN "
+                    + "FROM PHIEUNHAP p "
+                    + "JOIN CHITIETNHAP c ON p.maPN = c.maPN "
                     + "WHERE YEAR(p.ngayLap) = ? AND MONTH(p.ngayLap) = ? "
                     + "GROUP BY p.maPN";
             PreparedStatement prep = con.prepareStatement(sql);

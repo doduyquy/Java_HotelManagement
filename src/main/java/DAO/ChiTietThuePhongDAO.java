@@ -226,14 +226,18 @@ public class ChiTietThuePhongDAO implements DaoInterface<ChiTietThuePhongDTO> {
         boolean check = false;
         try {
             Connection conn = getConnection();
-            String query = "Update ChiTietThuePhong set tinhTrang = " + tt + " where maCTT = '" + maCTT + "' and maP ='" + maP + "' and ngayThue = '" + dateTimeThue + "'";
+            String query = "UPDATE CHITIETTHUEPHONG SET tinhTrang = " + tt + " where maCTT = '" + maCTT + "' and maP ='" + maP + "' and ngayThue = '" + dateTimeThue + "'";
             Statement stmt = conn.createStatement();
+            // Returns:
+            // either (1) the row count for SQL Data Manipulation Language (DML) statements or (2) 0 for SQL statements that return nothing
             if (stmt.executeUpdate(query) >= 1) {
                 check = true;
             }
             stmt.close();
             conn.close();
         } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Loi updateTT: " + e.getMessage());
         }
         return check;
     }
@@ -242,7 +246,7 @@ public class ChiTietThuePhongDAO implements DaoInterface<ChiTietThuePhongDTO> {
         int gia = 0;
         try {
             Connection conn = getConnection();
-            String query = "Select giaThue from ChiTietThuePhong where maCTT = '" + maCTT + "' and maP ='" + maP + "' and ngayThue = '" + dateTimeThue + "'";
+            String query = "Select giaThue from CHITIETTHUEPHONG where maCTT = '" + maCTT + "' and maP ='" + maP + "' and ngayThue = '" + dateTimeThue + "'";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
@@ -259,7 +263,7 @@ public class ChiTietThuePhongDAO implements DaoInterface<ChiTietThuePhongDTO> {
         boolean check = false;
         try {
             Connection conn = getConnection();
-            String query = "Update ChiTietThuePhong set giaThue = " + gia + " where maCTT = '" + maCTT + "' and maP ='" + maP + "' and ngayThue = '" + dateTimeThue + "'";
+            String query = "Update CHITIETTHUEPHONG set giaThue = " + gia + " where maCTT = '" + maCTT + "' and maP ='" + maP + "' and ngayThue = '" + dateTimeThue + "'";
             Statement stmt = conn.createStatement();
             if (stmt.executeUpdate(query) >= 1) {
                 check = true;
@@ -275,7 +279,7 @@ public class ChiTietThuePhongDAO implements DaoInterface<ChiTietThuePhongDTO> {
         boolean check = false;
         try {
             Connection conn = getConnection();
-            String query = "Update ChiTietThuePhong set ngayCheckOut = '" + dateCheckOut + "' where maCTT = '" + maCTT + "' and maP ='" + maP + "' and ngayThue = '" + dateTimeThue + "'";
+            String query = "Update CHITIETTHUEPHONG set ngayCheckOut = '" + dateCheckOut + "' where maCTT = '" + maCTT + "' and maP ='" + maP + "' and ngayThue = '" + dateTimeThue + "'";
             Statement stmt = conn.createStatement();
             if (stmt.executeUpdate(query) >= 1) {
                 check = true;
@@ -291,7 +295,7 @@ public class ChiTietThuePhongDAO implements DaoInterface<ChiTietThuePhongDTO> {
         boolean check = false;
         try {
             Connection conn = getConnection();
-            String query = "Update ChiTietThuePhong set ngayTra = '" + dateTra + "' where maCTT = '" + maCTT + "' and maP ='" + maP + "' and ngayThue = '" + dateTimeThue + "'";
+            String query = "Update CHITIETTHUEPHONG set ngayTra = '" + dateTra + "' where maCTT = '" + maCTT + "' and maP ='" + maP + "' and ngayThue = '" + dateTimeThue + "'";
             Statement stmt = conn.createStatement();
             if (stmt.executeUpdate(query) >= 1) {
                 int giaP = getGiaThue(maCTT, maP, dateTimeThue);

@@ -31,7 +31,7 @@ public class ChiTietTienIchDAO {
         int soLuong = 0;
         try {
             Connection con = new ConnectDB().getConnection();
-            String sql = "SELECT soLuong FROM chitiettienich WHERE maP= '" + maP + "' and maTI= '" + maTI + "'";
+            String sql = "SELECT soLuong FROM CHITIETTIENICH WHERE maP= '" + maP + "' and maTI= '" + maTI + "'";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -47,7 +47,7 @@ public class ChiTietTienIchDAO {
         boolean check = false;
         try {
             Connection conn = getConnection();
-            String query = "update chitiettienich set soLuong = " + soLuong + " where maTI = '" + maTI + "'" + " AND maP = '" + maP + "'";
+            String query = "update CHITIETTIENICH set soLuong = " + soLuong + " where maTI = '" + maTI + "'" + " AND maP = '" + maP + "'";
             Statement st = conn.createStatement();
             if (st.executeUpdate(query) >= 1) {
                 check = true;
@@ -68,10 +68,10 @@ public class ChiTietTienIchDAO {
 //		ChiTietThuePhongDTO ctt=null;
         try {
             Connection con = new ConnectDB().getConnection();
-            String sql = "SELECT tienich.maTI, tienich.tenTI, chitiettienich.soLuong "
-                    + "FROM tienich "
-                    + "INNER JOIN chitiettienich ON tienich.maTI = chitiettienich.maTI "
-                    + "WHERE chitiettienich.maP = '" + maP + "'";
+            String sql = "SELECT TIENICH.maTI, TIENICH.tenTI, CHITIETTIENICH.soLuong "
+                    + "FROM TIENICH "
+                    + "INNER JOIN CHITIETTIENICH ON TIENICH.maTI = CHITIETTIENICH.maTI "
+                    + "WHERE CHITIETTIENICH.maP = '" + maP + "'";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -95,7 +95,7 @@ public class ChiTietTienIchDAO {
         try {
             //maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy
             Connection con = new ConnectDB().getConnection();
-            String sql = "SELECT * FROM chitiettienich";
+            String sql = "SELECT * FROM CHITIETTIENICH";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {

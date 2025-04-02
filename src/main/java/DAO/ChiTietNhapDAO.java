@@ -15,8 +15,8 @@ public class ChiTietNhapDAO {
         double tongchi = 0;
         try {
             Connection conn = getConnection();
-            String query = "SELECT CAST(ngayLap AS DATE) AS Ngay, SUM(giaDVNhap * soLuong) AS TongChiTieu FROM phieunhap \n"
-                    + "INNER JOIN chitietnhap ON phieunhap.maPN = chitietnhap.maPN \n"
+            String query = "SELECT CAST(ngayLap AS DATE) AS Ngay, SUM(giaDVNhap * soLuong) AS TongChiTieu FROM PHIEUNHAP \n"
+                    + "INNER JOIN CHITIETNHAP ON PHIEUNHAP.maPN = CHITIETNHAP.maPN \n"
                     + "WHERE CAST(ngayLap AS DATE) = '" + nam + "-" + thang + "-" + ngay + "'\n"
                     + "GROUP BY CAST(ngayLap AS DATE)";
             Statement st = conn.createStatement();
@@ -36,7 +36,7 @@ public class ChiTietNhapDAO {
         long tongchi = 0;
         try {
             Connection conn = getConnection();
-            String query = "SELECT SUM(giaDVNhap * soLuong) AS tongtien FROM chitietnhap";
+            String query = "SELECT SUM(giaDVNhap * soLuong) AS tongtien FROM CHITIETNHAP";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {

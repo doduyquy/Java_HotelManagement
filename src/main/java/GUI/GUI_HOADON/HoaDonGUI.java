@@ -263,9 +263,25 @@ public class HoaDonGUI extends JPanel {
 //				xuLyHienThiHoaDon(maHd, tenNV, maCTT, tienPhong, tienDV, giamGia, phuThu, tongTien,ngayLap,pttt,tenKH);
 //				btnInHoaDonActionPerformed();
 //				new ThongBaoDialog("In hóa đơn thành công!", ThongBaoDialog.SUCCESS_DIALOG);
+
+                // Show HoaDon in console:
+                System.out.println("Thong tin hoa don: " + maHd + " " + tenNV + " " + maCTT + " "
+                        + tienPhong.replace(" VNĐ", "").replace(",", "") + " "
+                        + tienDV.replace(" VNĐ", "").replace(",", "") + " "
+                        + giamGia.replace(" %", "") + " " + phuThu.replace(" %", "") + " "
+                        + tongTien.replaceAll(" VNĐ", "").replace(",", "") + " " + ngayLap + " " + pttt);
+
                 HoaDonDTO hdto = new HoaDonDTO(maHd, maCTT, tienPhongValue, tienDVValue, giamGiaValue, phuThuValue, tongTienValue, ngayLap, pttt, 0);
+
+                System.out.println("After get data and create HoaDonDTO: " + hdto.getMaHD() + " " + hdto.getMaCTT() + " "
+                        + hdto.getTienP() + " " + hdto.getTienDV() + " "
+                        + hdto.getGiamGia() + " " + hdto.getPhuThu() + " "
+                        + hdto.getTongTien() + " " + hdto.getNgayThanhToan() + " " + hdto.getPhuongThucThanhToan());
+
+                // ERROR:
                 new FormHoaDon(hdto);
-//				new form
+                // new FormHoaDon(1, hd, HoaDonLeTanGUI.this);  // Hoa don le tan
+
             }
         });
         // 1.1thành phần giao diện bên dưới

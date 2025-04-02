@@ -236,16 +236,23 @@ public class ChiTietThuePhongGUI extends JPanel {
         pnCenter.add(pnHeader, BorderLayout.NORTH);
         pnCenter.add(scrDanhSach, BorderLayout.CENTER);
 
+
+        //**: thêm sự kiện xác nhận, tạo hóa đơn khi nhấn vào từng row (chi tiết đặt phòng)  */
         tbDanhSach.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (tbDanhSach.getSelectedRow() != -1) {
                     String maCTT = tbDanhSach.getValueAt(tbDanhSach.getSelectedRow(),
                             tbDanhSach.getColumnModel().getColumnIndex("Mã chi tiết thuê")).toString();
+
+                    System.out.println("Ma chi tiet thue: " + maCTT);
+
                     receptionistGUI.pnCenterContent.removeAll();
                     receptionistGUI.pnCenterContent.revalidate();
                     receptionistGUI.pnCenterContent.repaint();
                     receptionistGUI.pnRight.setVisible(false);
+
+                    // Call form detail booking
                     receptionistGUI.pnCenterContent.add(new FormDetailBooking(maCTT, false, receptionistGUI), BorderLayout.CENTER);
                 }
             }
@@ -407,6 +414,9 @@ public class ChiTietThuePhongGUI extends JPanel {
         btnTimKem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                System.err.println("Search: danh sach chi tiet dat phong");
+
                 String maCTT = TFthongTinThue[0].getText();
                 String maKH = TFthongTinThue[1].getText();
                 String tenKH = TFthongTinThue[2].getText();

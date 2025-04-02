@@ -143,7 +143,7 @@ public class TienIchDAO {
         boolean check = false;
         try {
             Connection conn = getConnection();
-            String query = "update tienich set soLuong = " + soLuong + " where maTI = '" + maTI + "'";
+            String query = "update TIENICH set soLuong = " + soLuong + " where maTI = '" + maTI + "'";
             Statement st = conn.createStatement();
             if (st.executeUpdate(query) >= 1) {
                 check = true;
