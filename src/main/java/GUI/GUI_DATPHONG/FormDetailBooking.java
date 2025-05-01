@@ -1252,6 +1252,9 @@ public class FormDetailBooking extends JPanel {
                                             date = sdf.parse(dateTimeThue);
                                         } catch (ParseException ex) {
                                         }
+
+                                        System.out.println("----- Xoa phong: " + txtMaCTT.getText().trim() + " " + maP + " " + sdfInsert.format(date));
+
                                         if (ChiTietThuePhongBUS.deleteCTTPhong(txtMaCTT.getText().trim(), maP, sdfInsert.format(date))) {
                                             new ThongBaoDialog("Xóa phòng thuê này thành công", 2);
                                             tbCTTRoom.renderTB(ChiTietThuePhongBUS.getListTPofCTT(chiTietThue.getMaCTT().trim()));

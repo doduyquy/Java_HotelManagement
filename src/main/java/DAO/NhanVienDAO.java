@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 public class NhanVienDAO {
 
     //get list
-    //FUNCTION FROM TRƯỞNG
     //BEGIN
     public static NhanVienDAO getInstance() {
         return new NhanVienDAO();
@@ -138,9 +137,9 @@ public class NhanVienDAO {
             ps.setString(8, x.getEmail());
             ps.setInt(9, x.getLuong1Ngay());
             ps.setInt(10, x.getXuLy());
-            //duy
+            //duy quy 
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            //duy
+            //duy quy
             java.util.Date date = sdf.parse(x.getNgaySinh());
             ps.setDate(6, new java.sql.Date(date.getTime()));
             date = sdf.parse(x.getNgayVaoLam());
@@ -199,7 +198,7 @@ public class NhanVienDAO {
         return check;
     }
 
-    //Duy
+    //Duy Quy
     public static ArrayList<NhanVienDTO> searchNV(boolean[] attri, String[] values, String top, String order) {
         ArrayList<NhanVienDTO> list = new ArrayList<>();
         try {

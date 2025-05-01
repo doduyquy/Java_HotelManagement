@@ -1,9 +1,9 @@
-﻿drop database QLKS_CNPM
+﻿drop database QuanLyKhachSan
 
-create database QLKS_CNPM
+create database QuanLyKhachSan
 go
 
-use QLKS_CNPM
+use QuanLyKhachSan
 go
 
 create table NHANVIEN

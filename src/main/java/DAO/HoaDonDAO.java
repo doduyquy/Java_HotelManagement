@@ -120,9 +120,14 @@ public class HoaDonDAO implements DaoInterface<HoaDonDTO> {
             //maHD,maCTT,tienP,tienDV,giamGia,phuThu,tongTien,ngayThanhToan,phuongThucThanhToan,xuLy
             Connection con = new ConnectDB().getConnection();
             Statement st = con.createStatement();
+
+            // delete from: xóa hoàn toàn -> không thể thu hồi 
+            // LƯU Ý: không nên dùng DELETE FROM 
+            // => dùng status 0 | 1
+
             String sql = "DELETE FROM HOADON "
                     + "WHERE maHD = '" + t.getMaHD() + "';";
-            check = st.executeUpdate(sql);
+            check = st.executeUpdate(sql);           
             if (check > 1) {
                 System.out.println("thành công");
             }

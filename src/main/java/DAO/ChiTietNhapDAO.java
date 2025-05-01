@@ -20,6 +20,16 @@ public class ChiTietNhapDAO {
                     + "WHERE CAST(ngayLap AS DATE) = '" + nam + "-" + thang + "-" + ngay + "'\n"
                     + "GROUP BY CAST(ngayLap AS DATE)";
             Statement st = conn.createStatement();
+
+            //  st.excute -> không  chắc là executeQuery hay executeUpdate
+            // -> return: getResultSet() <- true | false
+            //              getUpdateCount(): lấy số dòng được cập nhật
+            // VD:  Statement st = conn.createStatement();
+            //      boolean result = st.execute("select * from ChiTietNhap")
+            //      if (result) {       // Neu thanh cong
+            //          ResultSet rs = result.getResultSet();
+            //      }
+
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 tongchi = rs.getDouble("TongChiTieu");

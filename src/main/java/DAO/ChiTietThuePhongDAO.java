@@ -210,7 +210,11 @@ public class ChiTietThuePhongDAO implements DaoInterface<ChiTietThuePhongDTO> {
         boolean check = false;
         try {
             Connection conn = getConnection();
-            String query = "Delete ChiTietThuePhong where maCTT = '" + maCTT + "' and maP ='" + maP + "' and ngayThue = '" + dateTimeThue + "'";
+            String query = "DELETE FROM CHITIETTHUEPHONG where maCTT = '" + maCTT + "' and maP ='" + maP + "' and ngayThue = '" + dateTimeThue + "'";
+
+            // Print the query for debugging
+            System.out.println("Query: " + query);
+
             Statement stmt = conn.createStatement();
             if (stmt.executeUpdate(query) >= 1) {
                 check = true;
@@ -218,6 +222,8 @@ public class ChiTietThuePhongDAO implements DaoInterface<ChiTietThuePhongDTO> {
             stmt.close();
             conn.close();
         } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Loi deleteCTTPhong: " + e.getMessage());
         }
         return check;
     }

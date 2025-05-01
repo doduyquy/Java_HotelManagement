@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.UnsupportedLookAndFeelException; 
 
 public class mainGUI {
     public static NhanVienDTO nv = new NhanVienDTO();

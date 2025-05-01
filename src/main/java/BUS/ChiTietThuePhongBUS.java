@@ -67,6 +67,7 @@ public class ChiTietThuePhongBUS implements BusInterface<ChiTietThuePhongDTO> {
     }
 
     public static boolean deleteCTTPhong(String maCTT, String maP, String dateTimeThue) {
+        System.out.println("In ChiTietThuePhongBUS: " + maCTT + " " + maP + " " + dateTimeThue);
         return ChiTietThuePhongDAO.deleteCTTPhong(maCTT, maP, dateTimeThue);
     }
 

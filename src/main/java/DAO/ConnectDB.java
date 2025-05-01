@@ -8,15 +8,6 @@ public class ConnectDB {
 
     public static Connection getConnection() throws SQLException {
 
-        // try {
-        //     Connection cons = null;
-        //     Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        //     cons = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-T8EELAA;databaseName=QLKS;portNumber=1433;encrypt=true;trustServerCertificate=true;user=sa;password=123;");
-        //     return cons;
-        // } catch (ClassNotFoundException ex) {
-        // }
-        // return null;
-
         // QUY: connect to MySQL on VSCode:
 
         String url = "jdbc:mysql://localhost:3306/QuanLyKhachSan";
