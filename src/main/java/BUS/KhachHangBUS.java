@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public class KhachHangBUS {
 
-    //FUNCTION FROM TRƯỞNG
+    //FUNCTION FROM Quy
     //BEGIN
     private ArrayList<KhachHangDTO> listkh = KhachHangDAO.getIntance().selectAll();
 

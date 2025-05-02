@@ -95,7 +95,7 @@ public class PanelKhachHang extends JPanel {
 
     JPanel pnNgaySinhTo = new JPanel();
     JLabel lbngaySinhTo = new JLabel("đến         ");
-    JDateChooser txtngaySinhTo = new JDateChooser();
+    JDateChooser txtngaySinhTo = new JDateChooser(); 
     JPanel pnBtnSearchTo = new JPanel();
 
     JButton btnReset = new JButton("Làm mới");
@@ -338,7 +338,7 @@ public class PanelKhachHang extends JPanel {
                     if (search != "") {
                         search += " AND ";
                     }
-                    search += "quocTich like N'%" + cbgioiTinh.getSelectedItem().toString() + "%'";
+                    search += "gioiTinh like N'%" + cbgioiTinh.getSelectedItem().toString() + "%'";
                 }
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 if (txtngaySinh.getDate() != null) {
@@ -353,6 +353,7 @@ public class PanelKhachHang extends JPanel {
                     }
                     search += "cast(ngaySinh as Date) <= '" + sdf.format(txtngaySinhTo.getDate()) + "'";
                 }
+                search += " AND xuLy=0"; //khach hang chua xoa
                 if (search != "") {
                     search = "where " + search;
                 }
@@ -367,6 +368,7 @@ public class PanelKhachHang extends JPanel {
                     txtqueQuan.setText("");
                     txtquocTich.setText("");
                     txtngaySinh.setDate(null);
+                    txtngaySinhTo.setDate(null);
                     tbKH.renderTB();
                 } else {
                     tbKH.renderTB(list);
@@ -842,6 +844,7 @@ public class PanelKhachHang extends JPanel {
                 txtqueQuan.setText("");
                 txtquocTich.setText("");
                 txtngaySinh.setDate(null);
+                txtngaySinhTo.setDate(null);
                 tbKH.renderTB();
             }
         });

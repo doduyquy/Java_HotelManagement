@@ -10,7 +10,7 @@ public class KhachHangDAO implements DaoInterface<KhachHangDTO> {
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    //FUNCTION FROM TRƯỞNG
+    //FUNCTION FROM Quy
     //BEGIN
     public static KhachHangDAO getIntance() {
         return new KhachHangDAO();

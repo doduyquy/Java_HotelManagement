@@ -98,10 +98,10 @@ public class NhanVienBUS {
         ArrayList<NhanVienDTO> list = new ArrayList<>();
 
         for (NhanVienDTO x : NhanVienDAO.searchNV(attri, values, top, order)) {
-            //if (x.getXuLy() == 0) {
+            if (x.getXuLy() == 0) {
             //check nhan vien chua xoa
-            list.add(x);
-            //}
+                list.add(x);
+            }
         }
         return list;
     }

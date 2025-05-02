@@ -234,7 +234,7 @@ public class NhanVienDAO {
         String sql = "select ";
         //add top
         sql += top;
-        sql += "* from NhanVien where ";
+        sql += "* from NHANVIEN where ";
         boolean flag = false;
         for (int i = 0; i < 11; i++) {
             if (attri[i] == true) { //neu co thuoc tinh i

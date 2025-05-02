@@ -1,8 +1,14 @@
 package GUI.GUI_KHACHHANG;
 
+import GUI.ThongBaoDialog;
+import GUI.GUI_NHANVIEN.taikhoanJdialog;
 import GUI.GUI_RENDER_COMPONENTS.ScrollBar;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
+
+import BUS.KhachHangBUS;
+import DTO.KhachHangDTO;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -12,6 +18,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -241,6 +252,8 @@ public class PanelKhachHangReception extends JPanel {
 
         scp.setVerticalScrollBar(scrB);
         actionReset();
+        actionSearch();
+
         eventTableKH();
     }
 
@@ -362,19 +375,134 @@ public class PanelKhachHangReception extends JPanel {
         x.setModel(dcbm);
     }
 
+    public void resetInput(){
+        txtmaKH.setText("");
+        txttenKH.setText("");
+        txtCMND.setText("");
+        txtSDT.setText("");
+        txtqueQuan.setText("");
+        txtquocTich.setText("");
+        cbgioiTinh.setSelectedIndex(0);
+        txtngaySinh.setDate(null);
+        txtngaySinhTo.setDate(null);
+    }
     public void actionReset() {
         btnReset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cbgioiTinh.setSelectedIndex(0);
-                txtmaKH.setText("");
-                txttenKH.setText("");
-                txtCMND.setText("");
-                txtSDT.setText("");
-                txtqueQuan.setText("");
-                txtquocTich.setText("");
-                txtngaySinh.setDate(null);
+                System.out.println("Clicked btnReset in PanelKhachHangReception");
+                // cbgioiTinh.setSelectedIndex(0);
+                // txtmaKH.setText("");
+                // txttenKH.setText("");
+                // txtCMND.setText("");
+                // txtSDT.setText("");
+                // txtqueQuan.setText("");
+                // txtquocTich.setText("");
+                // txtngaySinh.setDate(null);
+                // txtngaySinhTo.setDate(null);
+                resetInput();
                 tbKH.renderTB();
+            }
+        });
+    }
+    public void actionSearch(){
+        btnSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+
+                System.out.println("Clicked btnSearch in PanelKhachHangReception");
+                
+                if (txtmaKH.getText().trim().length() == 0
+                        && txttenKH.getText().trim().length() == 0
+                        && txtCMND.getText().trim().length() == 0
+                        && txtSDT.getText().trim().length() == 0
+                        && txtquocTich.getText().trim().length() == 0
+                        && txtqueQuan.getText().trim().length() == 0
+                        && cbgioiTinh.getSelectedIndex() == 0
+                        && editor.getText().trim().length() == 0
+                        && editorTo.getText().trim().length() == 0) {
+                    new ThongBaoDialog("Vui lòng nhập thông tin muốn tìm", ThongBaoDialog.SUCCESS_DIALOG);
+                    return;
+                }
+                if (txtngaySinh.getDate() != null && txtngaySinhTo.getDate() != null) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    String dateTuNgay = sdf.format(txtngaySinh.getDate()) + " 00:00:00";
+                    String dateDenNgay = sdf.format(txtngaySinhTo.getDate()) + " 00:00:00";
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    LocalDateTime lcdTuNgay = LocalDateTime.parse(dateTuNgay, dtf);
+                    LocalDateTime lcdDenNgay = LocalDateTime.parse(dateDenNgay, dtf);
+                    if (lcdTuNgay.isAfter(lcdDenNgay)) {
+                        new ThongBaoDialog("Vui lòng chọn đến ngày phải sau từ ngày", 1);
+                        return;
+                    }
+                }
+                String search = "";
+                if (txtmaKH.getText().trim().length() != 0) {
+                    search += "maKH like '%" + txtmaKH.getText().trim() + "%'";
+                }
+                if (txttenKH.getText().trim().length() != 0) {
+                    if (search != "") {
+                        search += " AND ";
+                    }
+                    search += "tenKH like N'%" + txttenKH.getText().trim() + "%'";
+                }
+                if (txtCMND.getText().trim().length() != 0) {
+                    if (search != "") {
+                        search += " AND ";
+                    }
+                    search += "CMND like '%" + txtCMND.getText().trim() + "%'";
+                }
+                if (txtSDT.getText().trim().length() != 0) {
+                    if (search != "") {
+                        search += " AND ";
+                    }
+                    search += "sDT like '%" + txtSDT.getText().trim() + "%'";
+                }
+                if (txtqueQuan.getText().trim().length() != 0) {
+                    if (search != "") {
+                        search += " AND ";
+                    }
+                    search += "queQuan like N'%" + txtqueQuan.getText().trim() + "%'";
+                }
+                if (txtquocTich.getText().trim().length() != 0) {
+                    if (search != "") {
+                        search += " AND ";
+                    }
+                    search += "quocTich like N'%" + txtquocTich.getText().trim() + "%'";
+                }
+                if (cbgioiTinh.getSelectedIndex() != 0) {
+                    if (search != "") {
+                        search += " AND ";
+                    }
+                    search += "gioiTinh like N'%" + cbgioiTinh.getSelectedItem().toString() + "%'";
+                }
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                if (txtngaySinh.getDate() != null) {
+                    if (search != "") {
+                        search += " AND ";
+                    }
+                    search += "cast(ngaySinh as Date) >= '" + sdf.format(txtngaySinh.getDate()) + "'";
+                }
+                if (txtngaySinhTo.getDate() != null) {
+                    if (search != "") {
+                        search += " AND ";
+                    }
+                    search += "cast(ngaySinh as Date) <= '" + sdf.format(txtngaySinhTo.getDate()) + "'";
+                }
+                search += " AND xuLy=0"; //khach hang chua xoa
+                if (search != "") {
+                    search = "where " + search;
+                }
+                System.out.println("search in PanelKhachHangReception: " + search);
+                ArrayList<KhachHangDTO> list = KhachHangBUS.GetAllList(search);
+                if (list.isEmpty()){
+                    new ThongBaoDialog("Không tìm thấy khách hàng nào", ThongBaoDialog.INFO_DIALOG);
+                    resetInput();
+                    tbKH.renderTB();
+                } else {
+                    // Render new table
+                    tbKH.renderTB(list);
+                }
             }
         });
     }

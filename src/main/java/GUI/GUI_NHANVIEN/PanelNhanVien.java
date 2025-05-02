@@ -32,6 +32,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -156,7 +157,7 @@ public class PanelNhanVien extends JPanel {
         setEvent();
     }
 
-    //Duy
+    //Duy Quý
     public void setEvent() {
         //setEvent for btn
         btnReset.addActionListener(new ActionListener() {
@@ -605,7 +606,8 @@ public class PanelNhanVien extends JPanel {
     }
 
     public void actionSearch() {
-        //kiem tra va luu cac thuoc tinh
+        //kiem tra va luu cac thuoc tinh: 11 thuoc tinh
+        //maNV, tenNV, gioiTinh, chucVu, soNgayPhep, ngaySinhFrom, ngaySinhTo, ngayVaoLamFrom, ngayVaoLamTo, luong1Ngay, email
         boolean[] attris = new boolean[11];
         String[] values = new String[11];
         //maNV
@@ -692,15 +694,19 @@ public class PanelNhanVien extends JPanel {
             attris[10] = true;
             values[10] = txtEmail.getText();
         }
+
+        // Show the input for search
+        System.out.println("Input for search NV: " + Arrays.toString(values) + " | Attributes: " + Arrays.toString(attris) + " ");
+
         ArrayList<NhanVienDTO> tmp = NhanVienBUS.searchNV(attris, values, "", ""); //String for top and order "",""
         if (tmp.size() == 0) {
-            actionReset();
+            actionReset();  
             JOptionPane.showMessageDialog(this, "Không tìm thấy");
             tmp = NhanVienBUS.getListNV();
         }
         tbNV.setData(tmp);
     }
-    //Duy
+    //Duy Quý
 
     public void initComponents() {
         setLayout(new BorderLayout(5, 5));
