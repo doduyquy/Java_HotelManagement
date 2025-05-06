@@ -93,7 +93,7 @@ public class NhanVienBUS {
         return new NhanVienDTO();
     }
 
-    //Duy
+    //Duy Quy
     public static ArrayList<NhanVienDTO> searchNV(boolean[] attri, String[] values, String top, String order) {
         ArrayList<NhanVienDTO> list = new ArrayList<>();
 
@@ -105,5 +105,5 @@ public class NhanVienBUS {
         }
         return list;
     }
-    //Duy
+    //Duy Quy
 }

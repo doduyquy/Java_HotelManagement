@@ -806,9 +806,9 @@ public class PanelNhanVien extends JPanel {
         txtEmail.setFont(sgUI13);
 
         String chucVu[] = {"Chức vụ", "Quản lý", "Lễ tân", "Kế toán", "Bếp"};
-        //Duy
+        //Duy Quy 
         String luong[] = {"Lương 1 ngày", "Dưới 100000", "Từ 100000 đến 200000", "Từ 200000 đến 500000", "Từ 500000 đến 1000000", "Trên 1000000"};
-        //Duy
+        //Duy Quy
         String ngayPhep[] = {"Số ngày phép", "Dưới 2", "Từ 2 đến 4", "Trên 4"};
         setDefaulComboBox(cbChucVu, chucVu);
         setDefaulComboBox(cbLuong1Ngay, luong);

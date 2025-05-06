@@ -64,7 +64,7 @@ public class TaiKhoanBUS {
         }
         return "Tài khoản không tồn tại";
     }
-    //Duy
+    //Duy Quy
     public static ArrayList<TaiKhoanDTO> searchTK(boolean[] attri,String[] values, String top, String order){
         ArrayList<TaiKhoanDTO> list= new ArrayList<>();
         
@@ -73,7 +73,7 @@ public class TaiKhoanBUS {
        }
        return list;
     }
-    //Duy
+    //Duy Quy
     
     public static ArrayList<TaiKhoanDTO> getAllList() {
 

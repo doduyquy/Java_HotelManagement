@@ -16,10 +16,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class TableTaiKhoan extends JTable {
     
-    //Duy
+    //Duy Quy
     private ArrayList<TaiKhoanDTO> listNV= TaiKhoanBUS.getListNV();
     private   DefaultTableModel dtm = new DefaultTableModel();
-    //Duy
+    //Duy Quy
     public TableTaiKhoan() {
         super();
     }
@@ -47,9 +47,9 @@ public class TableTaiKhoan extends JTable {
                 default: 
                     break;
             }
-            //Duy
+            //Duy Quy
             Object data[]={i+1,listNV.get(i).getMaNV().trim(),listNV.get(i).getTaiKhoan().trim(),listNV.get(i).getVaiTro().trim(),tinhTrangTmp};
-            //Duy
+            //Duy Quy
             dtm.addRow(data);
         }
         setModel(dtm);
@@ -69,7 +69,7 @@ public class TableTaiKhoan extends JTable {
         getColumnModel().getColumn(4).setPreferredWidth(150);
         setBorder(new MatteBorder(0, 1, 0, 1, Color.decode("#EEEEEE")));
     }
-    //Duy
+    //Duy Quy
     public  void removeAll(){
         int rowCount = dtm.getRowCount();
         //Remove rows one by one from the end of the table
@@ -97,5 +97,5 @@ public class TableTaiKhoan extends JTable {
         }
     }
     
-    //Duy
+    //Duy Quy
 }

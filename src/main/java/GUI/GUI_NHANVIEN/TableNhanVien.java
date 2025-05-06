@@ -15,10 +15,10 @@ import javax.swing.table.DefaultTableModel;
 public class TableNhanVien extends JTable {
     
     private DecimalFormat dcf = new DecimalFormat("###,### VNĐ");
-    //Duy
+    //Duy Quy
     private ArrayList<NhanVienDTO> listNV= NhanVienBUS.getListNV();
     private   DefaultTableModel dtm = new DefaultTableModel();
-    //Duy
+    //Duy Quy
     public TableNhanVien() {
         super();
     }
@@ -42,9 +42,9 @@ public class TableNhanVien extends JTable {
         dtm.addColumn("Email");
         
         for (int i = 0; i < listNV.size(); i++) {
-            //Duy
+            //Duy Quy
             Object data[]={i+1,listNV.get(i).getMaNV().trim(),listNV.get(i).getTenNV().trim(),listNV.get(i).getGioiTinh().trim(),listNV.get(i).getNgaySinh(),listNV.get(i).getNgayVaoLam(),listNV.get(i).getChucVu().trim(),listNV.get(i).getSoNgayPhep(),listNV.get(i).getLuong1Ngay(),listNV.get(i).getEmail().trim()};
-            //Duy
+            //Duy Quy
             dtm.addRow(data);
         }
         setModel(dtm);
@@ -69,7 +69,7 @@ public class TableNhanVien extends JTable {
         getColumnModel().getColumn(9).setPreferredWidth(150);
         setBorder(new MatteBorder(0, 1, 0, 1, Color.decode("#EEEEEE")));
     }
-    //Duy
+    //Duy Quy
     public  void removeAll(){
         int rowCount = dtm.getRowCount();
         //Remove rows one by one from the end of the table
@@ -89,5 +89,5 @@ public class TableNhanVien extends JTable {
         }
     }
     
-    //Duy
+    //Duy Quy
 }
