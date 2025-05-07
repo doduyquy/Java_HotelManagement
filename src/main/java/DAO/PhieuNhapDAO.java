@@ -160,13 +160,16 @@ public class PhieuNhapDAO {
     }
 
     public static boolean checkID(String maPN) {
+        System.out.println("In checkID: " + maPN);
         boolean check = false;
         try {
             Connection conn = getConnection();
             String query = "select * from PHIEUNHAP where maPN = '" + maPN + "'";
             PreparedStatement ps = conn.prepareCall(query);
             ResultSet rs = ps.executeQuery();
+            System.out.println("---- after execute"  );
             check = rs.next();
+            System.out.println("----" + check);
             rs.close();
             ps.close();
             conn.close();

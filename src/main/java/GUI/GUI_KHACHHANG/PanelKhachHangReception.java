@@ -49,6 +49,7 @@ public class PanelKhachHangReception extends JPanel {
     private Font sgUI13b = new Font("Segoe UI", Font.BOLD, 13);
     private Font sgUI18b = new Font("Segoe UI", Font.BOLD, 17);
     private Font tNR13 = new Font("Times New Roman", Font.ITALIC, 13);
+
     JPanel pnTop = new JPanel();
     JPanel pnContent = new JPanel();
     JPanel pnTopHeader = new JPanel();
@@ -56,6 +57,7 @@ public class PanelKhachHangReception extends JPanel {
     JPanel pnTopHeaderRight = new JPanel();
     JLabel lbTopHeaderLeftTop = new JLabel("Quản lý khách hàng");
     JLabel lbTopHeaderLeftBottom = new JLabel("Bấm vào hàng của bảng danh sách khách hàng để chỉnh sửa");
+    
     JPanel pnmaKH = new JPanel();
     JLabel lbmaKH = new JLabel("Mã khách hàng");
     JTextField txtmaKH = new JTextField();

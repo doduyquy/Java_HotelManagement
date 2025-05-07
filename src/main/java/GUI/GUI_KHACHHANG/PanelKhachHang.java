@@ -498,6 +498,7 @@ public class PanelKhachHang extends JPanel {
 
     public void actionImportFile() {
         try {
+            // Lấy path hiện tại
             JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
             chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             chooser.showSaveDialog(null);

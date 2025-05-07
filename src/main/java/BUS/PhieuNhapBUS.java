@@ -84,6 +84,9 @@ public class PhieuNhapBUS {
     }
 
     public static String insertPN(PhieuNhapDTO x) {
+        System.out.println("insertPN: " + x.getMaPN() + " " + x.getMaNV() + " " + x.getNgayLapPhieu());
+
+        System.out.println("Attempting to insert: " + x);
         if (!PhieuNhapDAO.checkID(x.getMaPN())) {
             if (PhieuNhapDAO.insertPN(x)) {
                 return "Thêm phiếu nhập mới thành công";

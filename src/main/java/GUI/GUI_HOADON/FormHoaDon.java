@@ -452,10 +452,10 @@ public class FormHoaDon extends JDialog {
     private void btnInHoaDonActionPerformed() {
         try {
             if (!txtHoaDon.getText().equals("")) {
-                txtHoaDon.print();
+                // txtHoaDon.print();
 //                this.dispose();
             }
-        } catch (PrinterException ex) {
+        } catch (Exception ex) {
         }
     }
 }

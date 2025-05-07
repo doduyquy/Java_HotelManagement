@@ -205,6 +205,7 @@ public class DisplayFurniture extends JPanel {
 
         txtMaTI.setFont(sgUI13);
         txtTenTI.setFont(sgUI13);
+        // txtTenTI.setPreferredSize(new java.awt.Dimension(txtTenTI.getPreferredSize().width, 60)); // Thêm dòng này
         txtMaTIA.setFont(sgUI13);
         txtTenTIA.setFont(sgUI13);
 
